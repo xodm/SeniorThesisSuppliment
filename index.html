@@ -40,28 +40,32 @@
       padding: 1rem;
       margin-top: 2rem;
       font-size: 1.2rem;
+      overflow-x: auto;
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <h1>Thesis Supplementary Materials</h1>
-  <p>Below are additional materials referenced in my thesis. 
-  <div class="latex-box" id="latex-container">
-  Loading LaTeX...
-</div>
+  <p>Below are additional materials referenced in my thesis.</p>
+  
 
-<script>
-  fetch('expression.tex')
-    .then(response => response.text())
-    .then(data => {
-      const container = document.getElementById('latex-container');
-      container.innerHTML = `\\[ ${data.trim()} \\]`;
-      MathJax.typesetPromise(); // Rerender MathJax
-    })
-    .catch(error => {
-      document.getElementById('latex-container').innerText = 'Failed to load LaTeX expression.';
-      console.error('Error loading LaTeX:', error);
-    });
-</script>
+  <div class="latex-box" id="latex-container">
+    Loading LaTeX expression...
+  </div>
+
+  <script>
+    fetch('expression.tex')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('latex-container');
+        container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\[ ${data.trim()} \\]`;
+        MathJax.typesetPromise();
+      })
+      .catch(error => {
+        document.getElementById('latex-container').innerText = 'Failed to load LaTeX expression, try reloading.';
+        console.error('Error loading LaTeX:', error);
+      });
+  </script>
 </body>
 </html>
