@@ -34,9 +34,18 @@
     a:hover {
       text-decoration: underline;
     }
-    .latex-box {
+    .example1box {
       background-color: #ffe6f0;
       border-left: 4px solid #ff66a3;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .example2box {
+      background-color: #e6ecff;
+      border-left: 4px solid #667fff;
       padding: 1rem;
       margin-top: 2rem;
       font-size: 1.2rem;
@@ -50,15 +59,32 @@
   <p>Below are additional materials referenced in my thesis.</p>
   
 
-  <div class="latex-box" id="latex-container">
+  <div class="example1box" id="latex-container">
     Loading LaTeX expression...
   </div>
 
   <script>
-    fetch('expression.tex')
+    fetch('example1.tex')
       .then(response => response.text())
       .then(data => {
-        const container = document.getElementById('latex-container');
+        const container = document.getElementById('example1box');
+        container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\[ ${data.trim()} \\]`;
+        MathJax.typesetPromise();
+      })
+      .catch(error => {
+        document.getElementById('latex-container').innerText = 'Failed to load LaTeX expression, try reloading.';
+        console.error('Error loading LaTeX:', error);
+      });
+  </script>
+  <div class="example2box" id="latex-container">
+    Loading LaTeX expression...
+  </div>
+
+  <script>
+    fetch('example1.tex')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('example2box');
         container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\[ ${data.trim()} \\]`;
         MathJax.typesetPromise();
       })
