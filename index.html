@@ -50,6 +50,7 @@
       margin-top: 2rem;
       font-size: 1.2rem;
       overflow-x: auto;
+      overflow-y: auto;
       white-space: nowrap;
     }
   </style>
@@ -59,7 +60,7 @@
   <p>Below are additional materials referenced in my thesis.</p>
   
 
-  <div class="example1box" id="latex-container">
+  <div class="example1box" id="example1box">
     Loading LaTeX expression...
   </div>
 
@@ -68,30 +69,31 @@
       .then(response => response.text())
       .then(data => {
         const container = document.getElementById('example1box');
-        container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\[ ${data.trim()} \\]`;
+        container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\begin{align} ${data.trim()} \\end{align}`;
         MathJax.typesetPromise();
       })
       .catch(error => {
-        document.getElementById('latex-container').innerText = 'Failed to load LaTeX expression, try reloading.';
+        document.getElementById('example1box').innerText = 'Failed to load LaTeX expression, try reloading page.';
         console.error('Error loading LaTeX:', error);
       });
   </script>
-  <div class="example2box" id="latex-container">
+  <div class="example2box" id="example2box">
     Loading LaTeX expression...
   </div>
 
   <script>
-    fetch('example1.tex')
+    fetch('example2.tex')
       .then(response => response.text())
       .then(data => {
         const container = document.getElementById('example2box');
-        container.innerHTML = `Full expansion of Example 3.8, contains 562 terms\\[ ${data.trim()} \\]`;
+        container.innerHTML = `Full expansion of Example 3.11, conntains 184 and 454 terms respectively.\\begin{align} ${data.trim()} \\end{align}`;
         MathJax.typesetPromise();
       })
       .catch(error => {
-        document.getElementById('latex-container').innerText = 'Failed to load LaTeX expression, try reloading.';
+        document.getElementById('example2box').innerText = 'Failed to load LaTeX expression, try reloading page.';
         console.error('Error loading LaTeX:', error);
       });
   </script>
+
 </body>
 </html>
