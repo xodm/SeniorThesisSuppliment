@@ -53,6 +53,26 @@
       overflow-y: auto;
       white-space: nowrap;
     }
+    .example3box {
+      background-color: #d3faf2;
+      border-left: 4px solid #66ffed;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      overflow-x: auto;
+      overflow-y: auto;
+      white-space: nowrap;
+    }
+    .example4box {
+      background-color: #eed3fa;
+      border-left: 4px solid #c266ff;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      overflow-x: auto;
+      overflow-y: auto;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -86,11 +106,44 @@
       .then(response => response.text())
       .then(data => {
         const container = document.getElementById('example2box');
-        container.innerHTML = `Full expansion of Example 3.11, conntains 184 and 454 terms respectively.\\begin{align} ${data.trim()} \\end{align}`;
+        container.innerHTML = `Full expansion of Example 3.11, contains 184 and 454 terms respectively.\\begin{align} ${data.trim()} \\end{align}`;
         MathJax.typesetPromise();
       })
       .catch(error => {
         document.getElementById('example2box').innerText = 'Failed to load LaTeX expression, try reloading page.';
+        console.error('Error loading LaTeX:', error);
+      });
+  </script>
+  <div class="example3box" id="example3box">
+    Loading LaTeX expression...
+  </div>
+
+  <script>
+    fetch('example3.tex')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('example3box');
+        container.innerHTML = `Full expansion of Example 3.14, contains 182 terms respectively.\\begin{align} ${data.trim()} \\end{align}`;
+        MathJax.typesetPromise();
+      })
+      .catch(error => {
+        document.getElementById('example3box').innerText = 'Failed to load LaTeX expression, try reloading page.';
+        console.error('Error loading LaTeX:', error);
+      });
+  </script>
+    <div class="example4box" id="example4box">
+      Loading LaTeX expression...
+    </div>
+  <script>
+    fetch('example4.tex')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('example4box');
+        container.innerHTML = `Full expansion of Example 4.5, contains 450 terms respectively.\\begin{align} ${data.trim()} \\end{align}`;
+        MathJax.typesetPromise();
+      })
+      .catch(error => {
+        document.getElementById('example4box').innerText = 'Failed to load LaTeX expression, try reloading page.';
         console.error('Error loading LaTeX:', error);
       });
   </script>
